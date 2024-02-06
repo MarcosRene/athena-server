@@ -5,10 +5,10 @@ import { User } from '../models/User'
 class UserController {
   async index(req: Request, res: Response) {
     try {
-      const users = await User.find({})
+      const users = await User.find()
 
       if (!users) {
-        return res.status(400).json({ error: 'User not found.' })
+        return res.status(404).json({ error: 'User not found.' })
       }
 
       res.status(201).json(users)
@@ -19,22 +19,15 @@ class UserController {
 
   async store(req: Request, res: Response) {
     try {
-      const { name, email, password, confirm_password } = req.body
-
       const userExists = await User.findOne({
-        email,
+        email: req.body.email,
       })
 
       if (userExists) {
         return res.status(400).json({ error: 'User already exists.' })
       }
 
-      const user = await User.create({
-        name,
-        email,
-        password,
-        confirm_password,
-      })
+      const user = await User.create(req.body)
 
       res.status(201).json(user)
     } catch (error) {
@@ -49,10 +42,43 @@ class UserController {
       const user = await User.findById(id)
 
       if (!user) {
-        return res.status(400).json({ error: 'User not found.' })
+        return res.status(404).json({ error: 'User not found.' })
       }
 
       res.status(201).json(user)
+    } catch (error) {
+      res.sendStatus(500)
+    }
+  }
+
+  async update(req: Request, res: Response) {
+    try {
+      const imagePath = req.file?.filename
+      const { id } = req.params
+
+      const user = await User.findById(id)
+
+      if (!user) {
+        return res.status(404).json({ error: 'User not found.' })
+      }
+
+      if (req.body.email !== user?.email) {
+        const userExists = await User.findOne({ email: req.body.email })
+
+        if (userExists) {
+          return res.status(400).json({ error: 'User already exists.' })
+        }
+      }
+
+      const updatedUser = await User.findByIdAndUpdate(
+        id,
+        { ...req.body, avatar: imagePath },
+        {
+          new: true,
+        }
+      )
+
+      res.status(201).json(updatedUser)
     } catch (error) {
       res.sendStatus(500)
     }

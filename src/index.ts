@@ -15,6 +15,14 @@ mongoose
     `mongodb+srv://${process.env.MONGODB_USER_NAME}:${process.env.MONGODB_USER_PASSWORD}@cluster0.09zwuop.mongodb.net/?retryWrites=true&w=majority`
   )
   .then(() => {
+    app.use((req, res, next) => {
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+      res.setHeader('Access-Control-Allow-Methods', '*')
+      res.setHeader('Access-Control-Allow-Headers', '*')
+
+      next()
+    })
+
     app.use(express.json())
     app.use(router)
 
