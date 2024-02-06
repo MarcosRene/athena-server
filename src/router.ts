@@ -18,6 +18,9 @@ const upload = multer({
 })
 
 router.get('/users', UserController.index)
+
 router.post('/users', UserController.store)
+
 router.get('/users/:id', UserController.show)
+
 router.patch('/users/:id', upload.single('image'), UserController.update)
