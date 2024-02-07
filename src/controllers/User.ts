@@ -29,7 +29,7 @@ class UserController {
 
       const user = await User.create(req.body)
 
-      res.status(201).json(user)
+      res.status(200).json(user)
     } catch (error) {
       res.sendStatus(500)
     }
@@ -45,7 +45,7 @@ class UserController {
         return res.status(404).json({ error: 'User not found.' })
       }
 
-      res.status(201).json(user)
+      res.status(200).json(user)
     } catch (error) {
       res.sendStatus(500)
     }
@@ -54,6 +54,7 @@ class UserController {
   async update(req: Request, res: Response) {
     try {
       const imagePath = req.file?.filename
+
       const { id } = req.params
 
       const user = await User.findById(id)
