@@ -8,7 +8,7 @@ class UserController {
       const users = await User.find()
 
       if (!users) {
-        return res.status(404).json({ error: 'User not found.' })
+        return res.status(401).json({ error: 'User not found.' })
       }
 
       res.status(201).json(users)
@@ -29,7 +29,7 @@ class UserController {
 
       const user = await User.create(req.body)
 
-      res.status(200).json(user)
+      res.status(201).json(user)
     } catch (error) {
       res.sendStatus(500)
     }
@@ -42,10 +42,10 @@ class UserController {
       const user = await User.findById(id)
 
       if (!user) {
-        return res.status(404).json({ error: 'User not found.' })
+        return res.status(401).json({ error: 'User not found.' })
       }
 
-      res.status(200).json(user)
+      res.status(201).json(user)
     } catch (error) {
       res.sendStatus(500)
     }
@@ -53,14 +53,13 @@ class UserController {
 
   async update(req: Request, res: Response) {
     try {
-      const imagePath = req.file?.filename
-
+      const imagePath = req?.file
       const { id } = req.params
 
       const user = await User.findById(id)
 
       if (!user) {
-        return res.status(404).json({ error: 'User not found.' })
+        return res.status(401).json({ error: 'User not found.' })
       }
 
       if (req.body.email !== user?.email) {

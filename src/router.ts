@@ -3,6 +3,7 @@ import { Router } from 'express'
 import multer from 'multer'
 
 import UserController from './controllers/User'
+import SessionController from './controllers/Session'
 
 export const router = Router()
 
@@ -24,3 +25,5 @@ router.post('/users', UserController.store)
 router.get('/users/:id', UserController.show)
 
 router.patch('/users/:id', upload.single('image'), UserController.update)
+
+router.post('/session', SessionController.store)
