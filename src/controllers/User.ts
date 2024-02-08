@@ -53,7 +53,7 @@ class UserController {
 
   async update(req: Request, res: Response) {
     try {
-      const imagePath = req?.file
+      const imagePath = req.file?.filename
       const { id } = req.params
 
       const user = await User.findById(id)

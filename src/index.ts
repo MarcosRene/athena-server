@@ -1,3 +1,4 @@
+import path from 'node:path'
 import http from 'node:http'
 import dotenv from 'dotenv'
 import express from 'express'
@@ -23,6 +24,10 @@ mongoose
       next()
     })
 
+    app.use(
+      '/uploads',
+      express.static(path.resolve(__dirname, '..', 'uploads'))
+    )
     app.use(express.json())
     app.use(router)
 
