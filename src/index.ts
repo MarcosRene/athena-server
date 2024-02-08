@@ -3,10 +3,13 @@ import http from 'node:http'
 import dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
+import { promisify } from 'node:util'
 
 dotenv.config()
 
 import { router } from './router'
+import { auth } from './config/auth'
 
 const app = express()
 const server = http.createServer(app)

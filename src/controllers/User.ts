@@ -7,10 +7,6 @@ class UserController {
     try {
       const users = await User.find()
 
-      if (!users) {
-        return res.status(401).json({ error: 'User not found.' })
-      }
-
       res.status(201).json(users)
     } catch (error) {
       res.sendStatus(500)
