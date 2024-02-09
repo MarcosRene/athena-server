@@ -13,8 +13,9 @@ const scheduleSchema = new Schema({
     required: true,
   },
   teacherId: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
+    ref: 'User',
   },
   date: {
     type: String,
