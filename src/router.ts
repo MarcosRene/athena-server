@@ -2,6 +2,8 @@ import path from 'node:path'
 import { Router } from 'express'
 import multer from 'multer'
 
+import authMiddleware from './middlewares/auth'
+
 import UserController from './controllers/User'
 import SessionController from './controllers/Session'
 import ScheduleController from './controllers/Schedule'
@@ -29,6 +31,8 @@ router.patch('/users/:id', upload.single('image'), UserController.update)
 
 router.post('/session', SessionController.store)
 
+router.use(authMiddleware)
+
 router.get('/schedules', ScheduleController.index)
 
 router.post('/schedules', ScheduleController.store)
@@ -37,4 +41,4 @@ router.get('/schedules/:id', ScheduleController.show)
 
 router.put('/schedules/:id', ScheduleController.update)
 
-router.delete('/schedules/:id', ScheduleController.destroy)
+router.delete('/schedules/:id', ScheduleController.delete)

@@ -1,12 +1,10 @@
+import 'dotenv/config'
 import './lib/dayjs'
 
 import path from 'node:path'
 import http from 'node:http'
-import dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
-
-dotenv.config()
 
 import { router } from './router'
 
@@ -26,12 +24,12 @@ mongoose
       next()
     })
 
+    app.use(express.json())
+    app.use(router)
     app.use(
       '/uploads',
       express.static(path.resolve(__dirname, '..', 'uploads'))
     )
-    app.use(express.json())
-    app.use(router)
 
     server.listen(process.env.PORT, () => {
       console.log('Server running no port 3333 🚀')

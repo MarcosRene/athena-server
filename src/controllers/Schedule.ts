@@ -110,7 +110,7 @@ class ScheduleController {
     }
   }
 
-  async destroy(req: Request, res: Response) {
+  async delete(req: Request, res: Response) {
     try {
       const { id } = req.params
 

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 
-import { auth } from '../config/auth'
+import { authConfig } from '../config/auth'
 
 import { User } from '../models/User'
 
@@ -27,8 +27,8 @@ class SessionController {
           email,
           avatar,
         },
-        token: jwt.sign({ id }, auth.secret, {
-          expiresIn: auth.expiresIn,
+        token: jwt.sign({ id }, authConfig.secret, {
+          expiresIn: authConfig.expiresIn,
         }),
       })
     } catch (error) {
