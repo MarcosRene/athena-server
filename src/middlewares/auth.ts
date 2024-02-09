@@ -1,10 +1,10 @@
+import { Request, Response, NextFunction } from 'express'
 import { promisify } from 'node:util'
 import jwt from 'jsonwebtoken'
 
 import { authConfig } from '../config/auth'
 
-//@ts-ignore
-export default async (req, res, next) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization
 
   if (!authHeader) {
