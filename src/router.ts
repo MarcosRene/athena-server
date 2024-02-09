@@ -4,7 +4,7 @@ import multer from 'multer'
 
 import UserController from './controllers/User'
 import SessionController from './controllers/Session'
-import AppointmentController from './controllers/Appointment'
+import ScheduleController from './controllers/Schedule'
 
 export const router = Router()
 
@@ -29,12 +29,12 @@ router.patch('/users/:id', upload.single('image'), UserController.update)
 
 router.post('/session', SessionController.store)
 
-router.get('/appointments', AppointmentController.index)
+router.get('/schedules', ScheduleController.index)
 
-router.post('/appointments', AppointmentController.store)
+router.post('/schedules', ScheduleController.store)
 
-router.get('/appointments/:id', AppointmentController.show)
+router.get('/schedules/:id', ScheduleController.show)
 
-router.put('/appointments/:id', AppointmentController.update)
+router.put('/schedules/:id', ScheduleController.update)
 
-router.delete('/appointments/:id', AppointmentController.destroy)
+router.delete('/schedules/:id', ScheduleController.destroy)
