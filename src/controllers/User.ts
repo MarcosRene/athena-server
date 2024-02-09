@@ -5,7 +5,11 @@ import { User } from '../models/User'
 class UserController {
   async index(req: Request, res: Response) {
     try {
-      const users = await User.find()
+      const { role } = req.query
+
+      const filteredRole = role ? { role } : {}
+
+      const users = await User.find(filteredRole)
 
       res.status(201).json(users)
     } catch (error) {

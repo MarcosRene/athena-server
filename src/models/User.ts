@@ -18,6 +18,11 @@ const userSchema = new Schema({
     required: true,
   },
   avatar: { type: String },
+  role: {
+    type: String,
+    enum: ['STUDENT', 'TEACHER'],
+    default: 'STUDENT',
+  },
 })
 
 export const User = mongoose.model('User', userSchema)
