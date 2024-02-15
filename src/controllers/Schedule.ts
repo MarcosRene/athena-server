@@ -8,7 +8,13 @@ import { User } from '../models/User'
 class ScheduleController {
   async index(req: Request, res: Response) {
     try {
-      const schedules = await Schedule.find()
+      const { subject } = req.query
+
+      const filteredSubject = subject
+        ? { subject: new RegExp(`${subject}`, 'i') }
+        : {}
+
+      const schedules = await Schedule.find(filteredSubject)
 
       const allSchedules = schedules.map((schedule) => {
         const {

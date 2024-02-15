@@ -19,11 +19,13 @@ mongoose
   .then(() => {
     app.use(cors())
     app.use(express.json())
-    app.use(router)
+
     app.use(
       '/uploads',
       express.static(path.resolve(__dirname, '..', 'uploads'))
     )
+
+    app.use(router)
 
     server.listen(process.env.PORT, () => {
       console.log('Server running no port 3333 🚀')
