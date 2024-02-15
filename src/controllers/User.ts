@@ -70,12 +70,6 @@ class UserController {
         }
       }
 
-      const usernameExists = await User.findOne({ name: req.body.name })
-
-      if (usernameExists) {
-        return res.status(400).json({ error: 'Name already exists.' })
-      }
-
       const updatedUser = await User.findByIdAndUpdate(
         id,
         { ...req.body, avatar: imagePath },
