@@ -11,7 +11,7 @@ class UserController {
 
       const users = await User.find(filteredRole)
 
-      res.status(201).json(users)
+      res.status(200).json(users)
     } catch (error) {
       res.sendStatus(500)
     }
@@ -45,7 +45,7 @@ class UserController {
         return res.status(401).json({ error: 'User not found.' })
       }
 
-      res.status(201).json(user)
+      res.status(200).json(user)
     } catch (error) {
       res.sendStatus(500)
     }

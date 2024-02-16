@@ -86,7 +86,7 @@ class ScheduleController {
         return res.status(401).json({ error: 'Schedule not found.' })
       }
 
-      res.status(201).json(schedule)
+      res.status(200).json(schedule)
     } catch (error) {
       res.sendStatus(500)
     }
@@ -126,7 +126,7 @@ class ScheduleController {
         return res.status(401).json({ error: 'Schedule not found.' })
       }
 
-      res.status(204).send()
+      res.status(200).send()
     } catch (error) {
       res.sendStatus(500)
     }
