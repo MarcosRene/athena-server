@@ -18,15 +18,7 @@ const scheduleSchema = new Schema({
     ref: 'User',
   },
   date: {
-    type: String,
-    required: true,
-  },
-  time: {
-    type: String,
-    required: true,
-  },
-  dateTime: {
-    type: String,
+    type: Date,
   },
   oldScheduling: { type: Boolean },
 })

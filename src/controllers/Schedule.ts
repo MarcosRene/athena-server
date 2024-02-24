@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import crypto from 'crypto'
-import dayjs from 'dayjs'
+import { isAfter } from 'date-fns'
 
 import { Schedule } from '../models/Schedule'
 import { User } from '../models/User'
@@ -17,20 +17,10 @@ class ScheduleController {
       const schedules = await Schedule.find(filteredSubject)
 
       const allSchedules = schedules.map((schedule) => {
-        const {
-          _id,
-          identifier,
-          subject,
-          description,
-          teacherId,
-          date,
-          time,
-          __v,
-        } = schedule
+        const { _id, identifier, subject, description, teacherId, date } =
+          schedule
 
-        const formattedDateTime = dayjs(`${date} ${time}`)
-
-        const isOldScheduling = dayjs().isAfter(formattedDateTime, 'minute')
+        const isOldScheduling = isAfter(new Date(), String(date))
 
         return {
           _id,
@@ -38,9 +28,8 @@ class ScheduleController {
           subject,
           description,
           teacherId,
-          dateTime: formattedDateTime.format('DD [de] MMMM [às] HH:mm'),
+          date,
           oldScheduling: isOldScheduling,
-          __v,
         }
       })
 
@@ -52,7 +41,7 @@ class ScheduleController {
 
   async store(req: Request, res: Response) {
     try {
-      const { subject, description, teacherId, date, time } = req.body
+      const { subject, description, teacherId, date } = req.body
 
       const user = await User.findById(teacherId)
 
@@ -66,7 +55,6 @@ class ScheduleController {
         description,
         teacherId,
         date,
-        time,
         oldScheduling: null,
       })
 
