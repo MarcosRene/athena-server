@@ -2,6 +2,8 @@ import { Request, Response } from 'express'
 
 import { User } from '../models/User'
 
+const avatarURL = (avatar: string) => `http://localhost:3333/uploads/${avatar}`
+
 class UserController {
   async index(req: Request, res: Response) {
     try {
@@ -45,7 +47,17 @@ class UserController {
         return res.status(401).json({ error: 'User not found.' })
       }
 
-      res.status(200).json(user)
+      const currentUser = {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        confirm_password: user.confirm_password,
+        avatar: user.avatar && avatarURL(user.avatar),
+        role: user.role,
+      }
+
+      res.status(200).json(currentUser)
     } catch (error) {
       res.sendStatus(500)
     }
