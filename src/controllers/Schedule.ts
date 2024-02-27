@@ -14,11 +14,20 @@ class ScheduleController {
         ? { subject: new RegExp(`${subject}`, 'i') }
         : {}
 
-      const schedules = await Schedule.find(filteredSubject)
+      const schedules = await Schedule.find(filteredSubject).populate(
+        'userId',
+        '_id name'
+      )
 
       const allSchedules = schedules.map((schedule) => {
-        const { _id, identifier, subject, description, teacherId, date } =
-          schedule
+        const {
+          _id,
+          identifier,
+          subject,
+          description,
+          userId: user,
+          date,
+        } = schedule
 
         const isOldScheduling = isAfter(new Date(), String(date))
 
@@ -27,7 +36,8 @@ class ScheduleController {
           identifier,
           subject,
           description,
-          teacherId,
+          userId: user._id,
+          teacher: user,
           date,
           oldScheduling: isOldScheduling,
         }
@@ -41,9 +51,9 @@ class ScheduleController {
 
   async store(req: Request, res: Response) {
     try {
-      const { subject, description, teacherId, date } = req.body
+      const { subject, description, userId, date } = req.body
 
-      const user = await User.findById(teacherId)
+      const user = await User.findById(userId)
 
       if (!user) {
         return res.status(401).json({ error: 'User not found.' })
@@ -53,7 +63,7 @@ class ScheduleController {
         identifier: `#${crypto.randomBytes(4).toString('hex')}`,
         subject,
         description,
-        teacherId,
+        userId,
         date,
         oldScheduling: null,
       })

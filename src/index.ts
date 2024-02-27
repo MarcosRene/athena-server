@@ -11,6 +11,8 @@ import { router } from './router'
 const app = express()
 const server = http.createServer(app)
 
+const PORT = 3333
+
 mongoose
   .connect(
     `mongodb+srv://${process.env.MONGODB_USER_NAME}:${process.env.MONGODB_USER_PASSWORD}@cluster0.09zwuop.mongodb.net/?retryWrites=true&w=majority`
@@ -26,11 +28,10 @@ mongoose
 
     app.use(router)
 
-    server.listen(process.env.PORT, () => {
+    server.listen(PORT, () => {
       console.log('Server running no port 3333 🚀')
     })
   })
-
   .catch(() => {
     console.log('Error connecting to mongodb ⚠️')
   })
