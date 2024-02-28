@@ -1,10 +1,11 @@
-<img src="./github/login.png" alt="Tela de login" />
+<img src="./.github/login.png" alt="Tela de login" />
 
 # Gereneciamento de horários 🕑
 
-Este repositório contém uma aplicação para gerenciamento de horários. A aplicação oferece uma série de rotas para interagir com os dados de usuários e agendamentos. 
+Este repositório contém uma aplicação para gerenciamento de horários. A aplicação oferece uma série de rotas para interagir com os dados de usuários e agendamentos.
 
 ### Rotas 🛣️
+
 Abaixo estão destacadas as principais rotas.
 
 - Users
@@ -17,7 +18,7 @@ GET /users
 GET /users/:id
 
 # Busca todos os usuários do tipo "TEACHER"
-GET /users?role="TEACHER" 
+GET /users?role="TEACHER"
 
 # Cria um usuário com base no corpo da requisão
 POST /users
@@ -26,16 +27,16 @@ body {
   "email": "marcos@gmail.com",
   "password": "123456",
   "confim_password": "123456",
-  "role": "STUDENT", // por padrão
+  "role": "STUDENT", # por padrão
 }
 
 # Atualiza um usuário com base no corpo da requisão
 UPDATE /users/:id
 body {
   "name": "Marcos",
-  "emai"": "marcos@gmail.com",
+  "email": "marcos@gmail.com",
   "password": "123456",
-  "confi"m_password": "123456",
+  "confim_password": "123456",
   "role"(por padrão): "TEACHER",
   "image": "profile.png"
 }
@@ -86,7 +87,7 @@ POST /session
 body {
   "email": "johndoedev@gmail.com",
   "password": "123456"
-} 
+}
 ```
 
 ### 📝 License
