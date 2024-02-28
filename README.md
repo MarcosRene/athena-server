@@ -90,6 +90,20 @@ body {
 }
 ```
 
-### 📝 License
+### 📝 Instruções
+
+```bash
+# git clone https://github.com/MarcosRene/athena-server.git
+
+# cd athena-server
+
+# yarn || npm install || pnpm install
+
+# yarn dev || npm run dev || pnpm run dev
+```
+
+> Nota: Na raiz do projeto, existe um arquivo chamado `.env.example`. Dentro desse arquivo, existem algumas variáveis de ambiente. Copie-as. Em seguida, crie um arquivo `.env` na raiz do projeto e cole as variáveis de ambiente. Após realizar essas etapas, é importante destacar que ainda há uma ação necessária. Você precisará acessar o serviço de nuvem do MongoDB para obter seu nome de usuário e senha de acesso. Essas credenciais serão necessárias para configurar corretamente o acesso ao banco de dados MongoDB em seu ambiente local.
+
+### 🧾 License
 
 Este projeto está sob a licença MIT. Consulte o arquivo [LICENSE](https://opensource.org/) para mais informações.
