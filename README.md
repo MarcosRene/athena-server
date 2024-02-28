@@ -37,7 +37,7 @@ body {
   "email": "marcos@gmail.com",
   "password": "123456",
   "confim_password": "123456",
-  "role"(por padrão): "TEACHER",
+  "role": "TEACHER",
   "image": "profile.png"
 }
 
