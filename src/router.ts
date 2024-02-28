@@ -29,6 +29,8 @@ router.get('/users/:id', UserController.show)
 
 router.patch('/users/:id', upload.single('image'), UserController.update)
 
+router.delete('/users/:id', UserController.delete)
+
 router.post('/session', SessionController.store)
 
 router.use(authMiddleware)

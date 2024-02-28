@@ -95,6 +95,22 @@ class UserController {
       res.sendStatus(500)
     }
   }
+
+  async delete(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+
+      const schedule = await User.findByIdAndDelete(id)
+
+      if (!schedule) {
+        return res.status(401).json({ error: 'User not found.' })
+      }
+
+      res.status(200).send()
+    } catch (error) {
+      res.sendStatus(500)
+    }
+  }
 }
 
 export default new UserController()
