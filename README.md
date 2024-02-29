@@ -23,22 +23,22 @@ GET /users?role="TEACHER"
 # Cria um usuário com base no corpo da requisão
 POST /users
 body {
-  "name": "Marcos",
-  "email": "marcos@gmail.com",
-  "password": "123456",
-  "confim_password": "123456",
-  "role": "STUDENT", # por padrão
+  name: "Marcos",
+  email: "marcos@gmail.com",
+  password: "123456",
+  confim_password: "123456",
+  role: "STUDENT", # por padrão
 }
 
 # Atualiza um usuário com base no corpo da requisão
 UPDATE /users/:id
 body {
-  "name": "Marcos",
-  "email": "marcos@gmail.com",
-  "password": "123456",
-  "confim_password": "123456",
-  "role": "TEACHER",
-  "image": "profile.png"
+  name: "Marcos",
+  email: "marcos@gmail.com",
+  password: "123456",
+  confim_password: "123456",
+  role: "TEACHER",
+  image: "profile.png"
 }
 
 # Deleta um usuário
@@ -55,24 +55,24 @@ GET /schedules
 GET /schedules/:id
 
 # Busca um agendamento com base no assunto
-GET /users?subject="TCC"
+GET /schedules?subject="TCC"
 
 # Cria um agendamento com base no corpo da requisão
 POST /schedules
 body {
-  "subject": "Falar sobre Projeto de extensão",
-  "description": "Olá professor, espero que esteja bem! Marcando um horário para falarmos sobre o projeto da plataforma de agendamento.",
-  "userId": "65c636a1cf2d57831d5367d7",
-  "date": "2024/02/29 14:00"
+  subject: "Falar sobre Projeto de extensão",
+  description: "Olá professor, espero que esteja bem! Marcando um horário para falarmos sobre o projeto da plataforma de agendamento.",
+  userId: "65c636a1cf2d57831d5367d7",
+  date: "2024/02/29 14:00"
 }
 
 # Atualiza um agendamento com base no corpo da requisão
 UPDATE /schedules/:id
 body {
-  "subject": "Falar sobre TCC",
-  "description": "Olá professor, espero que esteja bem! Marcando um horário para falarmos sobre o tema do meu TCC",
-  "userId": "65c636a1cf2d57831d5367d7",
-  "date": "2024/02/29 14:00"
+  subject: "Falar sobre TCC",
+  description: "Olá professor, espero que esteja bem! Marcando um horário para falarmos sobre o tema do meu TCC",
+  userId: "65c636a1cf2d57831d5367d7",
+  date: "2024/02/29 14:00"
 }
 
 # Deleta um agendamento
@@ -85,21 +85,25 @@ DELETE /schedules/:id
 # Cria uma sessão
 POST /session
 body {
-  "email": "johndoedev@gmail.com",
-  "password": "123456"
+  email: "johndoedev@gmail.com",
+  password: "123456"
 }
 ```
 
 ### 📝 Instruções
 
 ```bash
-# git clone https://github.com/MarcosRene/athena-server.git
+# Adicione o repositório a sua máquina
+git clone https://github.com/MarcosRene/athena-server.git
 
-# cd athena-server
+# Entre na pasta do projeto
+cd athena-server
 
-# yarn || npm install || pnpm install
+# Instale as dependências do projeto executando um dos comandos abaixo
+yarn || npm install || pnpm install
 
-# yarn dev || npm run dev || pnpm run dev
+# Start a aplicação com um dos comandos abaixo
+yarn dev || npm run dev || pnpm run dev
 ```
 
 > Nota: Na raiz do projeto, existe um arquivo chamado `.env.example`. Dentro desse arquivo, existem algumas variáveis de ambiente. Copie-as. Em seguida, crie um arquivo `.env` na raiz do projeto e cole as variáveis de ambiente. Após realizar essas etapas, é importante destacar que ainda há uma ação necessária. Você precisará acessar o serviço de nuvem do MongoDB para obter seu nome de usuário e senha de acesso. Essas credenciais serão necessárias para configurar corretamente o acesso ao banco de dados MongoDB em seu ambiente local.
