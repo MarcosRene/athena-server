@@ -1,15 +1,13 @@
 import 'dotenv/config'
 
 import path from 'node:path'
-import http from 'node:http'
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-import { router } from './router'
+import { app as router } from './router'
 
 const app = express()
-const server = http.createServer(app)
 
 mongoose
   .connect(
@@ -26,7 +24,7 @@ mongoose
 
     app.use(router)
 
-    server.listen(process.env.PORT, () => {
+    app.listen(process.env.PORT, () => {
       console.log('Server running no port 3333 🚀')
     })
   })

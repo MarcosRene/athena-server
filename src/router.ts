@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { Router } from 'express'
+import express, { Router } from 'express'
 import multer from 'multer'
 
 import authMiddleware from './middlewares/auth'
@@ -8,7 +8,7 @@ import UserController from './controllers/User'
 import SessionController from './controllers/Session'
 import ScheduleController from './controllers/Schedule'
 
-export const router = Router()
+export const app = express()
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -21,26 +21,30 @@ const upload = multer({
   }),
 })
 
-router.get('/users', UserController.index)
+app.route('/hello').get((request, response) => {
+  return response.json({ message: 'Learning lab' })
+})
 
-router.post('/users', UserController.store)
+app.get('/users', UserController.index)
 
-router.get('/users/:id', UserController.show)
+app.post('/users', UserController.store)
 
-router.patch('/users/:id', upload.single('image'), UserController.update)
+app.get('/users/:id', UserController.show)
 
-router.delete('/users/:id', UserController.delete)
+app.patch('/users/:id', upload.single('image'), UserController.update)
 
-router.post('/session', SessionController.store)
+app.delete('/users/:id', UserController.delete)
 
-router.use(authMiddleware)
+app.post('/session', SessionController.store)
 
-router.get('/schedules', ScheduleController.index)
+// router.use(authMiddleware)
 
-router.post('/schedules', ScheduleController.store)
+app.get('/schedules', ScheduleController.index)
 
-router.get('/schedules/:id', ScheduleController.show)
+app.post('/schedules', ScheduleController.store)
 
-router.put('/schedules/:id', ScheduleController.update)
+app.get('/schedules/:id', ScheduleController.show)
 
-router.delete('/schedules/:id', ScheduleController.delete)
+app.put('/schedules/:id', ScheduleController.update)
+
+app.delete('/schedules/:id', ScheduleController.delete)

@@ -9,11 +9,11 @@ class UserController {
     try {
       const { role } = req.query
 
-      const filteredRole = role ? { role } : {}
+      const filteredRole: any = role ? { role } : { role: 'STUDENT' }
 
       const users = await User.find(filteredRole)
 
-      res.status(200).json(users)
+      res.status(200).json(users) 
     } catch (error) {
       res.sendStatus(500)
     }
